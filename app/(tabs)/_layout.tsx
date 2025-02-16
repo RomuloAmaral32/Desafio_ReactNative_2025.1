@@ -1,45 +1,46 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text } from 'react-native';
+import styles from '../(tabs)/styles/login';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    console.log('Email:', email);
+    console.log('Password:', password);
+  };
+
+  const handleRegister = () => {
+    console.log('Redirecting to register page...');
+  };
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+    <View style={styles.container}>
+      <View style={styles.inputcontainer}>  
+        <Text style={styles.title}>Login</Text>
+        <View style={styles.entradascontainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite seu Email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Digite sua senha"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Entrar" onPress={handleLogin} color="#2028BF"  />
+          <Button title="Cancelar" onPress={handleRegister} color="#2028BF" />
+        </View>
+      </View>
+    </View>
   );
 }

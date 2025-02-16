@@ -30,9 +30,9 @@
     "expo-symbols": "~0.2.1",
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
-    "react": "18.3.1",
+    "react": "^18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.6",
+    "react-native": "^0.76.6",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "4.12.0",
@@ -50,5 +50,16 @@
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": true,
+  "description": "<h1 align=\"center\">Desafio React Native 2025.1</h1>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomuloAmaral32/Desafio_ReactNative_2025.1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RomuloAmaral32/Desafio_ReactNative_2025.1/issues"
+  },
+  "homepage": "https://github.com/RomuloAmaral32/Desafio_ReactNative_2025.1#readme"
 }
