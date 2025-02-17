@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
-import { useNavigation } from '@react-navigation/native'; 
 import styles from './styles/login';
-import { router } from 'expo-router';
+import { router } from 'expo-router';  // Para navegação com expo-router
 
 export default function TabLayout() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const navigation = useNavigation();
-
 
   const handleLogin = () => {
     if (email === '' || password === '') {
@@ -20,6 +16,8 @@ export default function TabLayout() {
     console.log('Email:', email);
     console.log('Password:', password);
     
+    // Navegando para a tela "paginainicial" após o login
+    router.push('/paginainicial');  // Certifique-se de que o caminho esteja correto
   };
 
   return (
