@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'; 
-import styles from '../(tabs)/styles/login';
+import styles from './styles/login';
 
 export default function TabLayout() {
   const [email, setEmail] = useState('');
