@@ -1,50 +1,69 @@
-import { Button, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     backgroundColor: '#999393',
-    padding: 20,
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#000000',
   },
   inputcontainer: {
     width: '80%',
-    height: '70%',
+    padding: 20,
     backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 10,
-    justifyContent: 'space-between', 
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
-  entradascontainer: {
-    width: '100%',
-    flexDirection: 'column',
-    gap: 20,
-  },
-  input: {
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#999393',
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 10,
-  },
-  
-  buttonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 15,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 20,
   },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  entradascontainer: {
+    marginBottom: 20,
+  },
+  inputEntrada: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  input: {
+    flex: 1,
+    padding: 10,
+    fontSize: 16,
+  },
+  icon: {
+    marginRight: 10, 
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#2028BF',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
-
-export default styles;
