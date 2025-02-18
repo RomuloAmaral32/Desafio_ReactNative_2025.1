@@ -33,7 +33,7 @@ export default function PaginaInicial() {
 
           <TouchableOpacity 
             style={styles.conjunto}
-            onPress={() => navigation.goBack()} // Navega para a tela de Logout------volta para a tela anterior(o correto seria voltar para a index sem depender de voltar para a tela anterior)
+            onPress={() => router.push('/(tabs)')} // Navega para a tela de Logout------volta para a tela anterior(o correto seria voltar para a index sem depender de voltar para a tela anterior)
           >
             <MaterialCommunityIcons name="logout" size={24} color="white" />
             <Text style={styles.textConjunto}>Logout</Text>
