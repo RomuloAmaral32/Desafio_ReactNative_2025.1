@@ -1,6 +1,6 @@
 // src/screens/PaginaInicial.js
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/paginainicial';
@@ -10,6 +10,7 @@ export default function PaginaInicial() {
   const navigation = useNavigation(); 
 
   return (
+    <ScrollView style={styles.containerPai}> 
     <View style={styles.containerPai}>
       <View style={styles.NavBar}>
         <Image 
@@ -39,6 +40,25 @@ export default function PaginaInicial() {
           </TouchableOpacity>
         </View>
       </View>
+        <View style={styles.container}>
+          <Text style={styles.title}>Produto em destaque</Text>
+          <View style={styles.destaqueProduto}>
+
+          </View>
+        </View>
+        <View style={styles.containerNovos}>
+        <Text style={styles.subtitle}>Novos Produtos</Text>
+          <View style={styles.cards}>
+
+          </View>
+        </View>
+        <View>
+          <Text style={styles.subtitle}>sobre o aplicativo</Text>
+        </View>
+        <View style={styles.containerdescricao}>
+          <Text style={styles.descricao}>O aplicativo tem como objetivo centralizar todas as ofertas de produtos de diversas categorias em um único lugar, criando um ponto de encontro entre vendedores e clientes. Nele, os usuários podem explorar novidades e aproveitar boas ofertas, facilitando o encontro eficiente entre a oferta e a demanda. Dessa forma, o aplicativo proporciona uma experiência prática e otimizada, onde consumidores podem acessar uma ampla variedade de produtos, enquanto os vendedores encontram uma plataforma eficaz para alcançar seu público-alvo.</Text>
+        </View>
     </View>
+    </ScrollView>
   );
-}
+} 
