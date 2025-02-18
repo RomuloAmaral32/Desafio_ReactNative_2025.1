@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     containerPai: {
         flex: 1,
-        //justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#999393',
     },
@@ -16,10 +15,30 @@ export default StyleSheet.create({
         backgroundColor: '#2640A8',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
-        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
         width: '100%',
+        gap: "20%",
         minHeight: 70,
-        height: 60,
+    },
+    icon: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+    },
+    conjunto: {  
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    conjuntoBtns: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        gap: "5%",
+    },
+    textConjunto: {
+        color: 'white',
+        fontSize: 18,
     },
     title: {
         fontSize: 24,
