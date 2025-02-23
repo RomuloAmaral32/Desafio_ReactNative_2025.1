@@ -1,10 +1,9 @@
-// src/screens/PaginaInicial.js
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import NavBar from '../../components/NavBar';             //tava (talvez ainda esteja) essa parte com o vermelho de problemas- mas os nomes sao os mesmos, mesmas letras maiusculas e minusculas
+import NavBar from '../../components/NavBar';             
 
 export default function PaginaInicial() {
   const navigation = useNavigation(); 
@@ -44,7 +43,6 @@ export default function PaginaInicial() {
 const styles = StyleSheet.create({
   containerPai: {
     flex: 1,
-    //alignItems: 'center',
     backgroundColor: '#999393',
 },
 container: {

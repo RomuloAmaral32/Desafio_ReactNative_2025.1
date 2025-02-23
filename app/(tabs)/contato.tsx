@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 're
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import NavBar from '../../components/navBar';
+import NavBar from '../../components/NavBar';
 
 export default function PaginaInicial() {
   const buttons = [
