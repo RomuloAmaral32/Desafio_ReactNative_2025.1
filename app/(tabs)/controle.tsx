@@ -5,6 +5,9 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import NavBar from '../../components/NavBar';
+import CardsControle from '../../components/CardsControle';
+
+
 
 export default function controle() {
   const navigation = useNavigation(); 
@@ -34,7 +37,74 @@ export default function controle() {
         </View>
         <View style={styles.produtos}>
           <Text style={styles.title}>Seus produtos:</Text>
-          
+          <View style={styles.todoscards}>
+            <View style={styles.cads}>
+              <View style={styles.doiscards}>
+                <CardsControle
+                imageUri="https://lojadatenb2c.vtexassets.com/assets/vtex.file-manager-graphql/images/c0170385-30d6-4fed-9deb-4f5d57d9062d___affcfd10d3331c2bcaeb0df63c07b92a.png"
+                category="Eletrônicos"
+                title="Notbook"
+                price="R$ 1999,99"
+                onView={() => console.log('Visualizar')}
+                onEdit={() => console.log('Editar')}
+                onDelete={() => console.log('Excluir')} 
+                />
+                <CardsControle
+                imageUri="https://t2.tudocdn.net/719058?w=824&h=494"
+                category="Eletrônicos"
+                title="Smartphone XYZ"
+                price="R$ 1999,99"
+                onView={() => console.log('Visualizar')}
+                onEdit={() => console.log('Editar')}
+                onDelete={() => console.log('Excluir')} 
+                />
+              </View>
+            </View>
+            <View style={styles.cads}>
+              <View style={styles.doiscards}>
+                <CardsControle
+                imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s"
+                category="Comida"
+                title="Hamburger"
+                price="R$ 29,99"
+                onView={() => console.log('Visualizar')}
+                onEdit={() => console.log('Editar')}
+                onDelete={() => console.log('Excluir')}  
+                />
+                <CardsControle
+                imageUri="https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg"
+                category="Vestuarios"
+                title="Calçado"
+                price="R$ 190,99"
+                onView={() => console.log('Visualizar')}
+                onEdit={() => console.log('Editar')}
+                onDelete={() => console.log('Excluir')} 
+                />
+              </View>
+            </View>
+            <View style={styles.cads}>
+              <View style={styles.doiscards}>
+                <CardsControle
+                imageUri="https://www.webmotors.com.br/wp-content/uploads/2022/01/04173246/1.-Honda-CG-160.jpg"
+                category="Veículos"
+                title="Moto"
+                price="R$ 19990,99"
+                onView={() => console.log('Visualizar')}
+                onEdit={() => console.log('Editar')}
+                onDelete={() => console.log('Excluir')} 
+                />
+                <CardsControle
+                imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3EkkbEdF4CsU_9ajQ4LzNYn2TSs1je7JEOA&s"
+                category="Imóveis"
+                title="Casa em condomínio"
+                price="R$ 259500"
+                onView={() => console.log('Visualizar')}
+                onEdit={() => console.log('Editar')}
+                onDelete={() => console.log('Excluir')} 
+                />
+              </View>
+            </View>
+          </View>
         </View>
       </ScrollView> 
     );
@@ -50,7 +120,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 40,
+    marginTop:0,
   },
   boasVindas: {
     marginTop: 15,
@@ -71,9 +142,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#2028BF',
-        paddingVertical: 8,
-        paddingHorizontal: 12,
-        borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 12,
   },
   buttonText: {
     color: '#fff',
@@ -90,6 +161,20 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   produtos: {
-    marginTop:40,
+    marginTop:30,
+    marginBottom:30,
+    
   },
+  cads: {
+    flexDirection: 'row',
+  },
+  todoscards: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap:15,
+  }, 
+  doiscards: {
+    flexDirection: 'row',
+    gap:20,
+  }
 });
