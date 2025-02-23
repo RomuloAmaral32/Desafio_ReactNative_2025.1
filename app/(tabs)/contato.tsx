@@ -4,39 +4,18 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 're
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-
+import NavBar from '../../components/navBar';
 
 export default function PaginaInicial() {
+  const buttons = [
+    { label: 'Home', icon: <FontAwesome name="home" size={24} color="white" />, onPress: () => router.push('/(tabs)/paginainicial') },
+    { label: 'Controle', icon: <Entypo name="bar-graph" size={24} color="white" />, onPress: () => router.push('/(tabs)/controle') },
+    { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => router.push('/(tabs)') }
+  ];
+
   return (
     <ScrollView style={styles.containerPai}>
-        <View style={styles.NavBar}>
-          <Image 
-            source={require('../../assets/images/marketplace.png')}
-            style={styles.logo}
-          />
-          <View style={styles.conjuntoBtns}>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/paginainicial')}>
-              <View style={styles.conjunto}>
-              <FontAwesome name="home" size={24} color="white" />
-                <Text style={styles.textConjunto}>Home</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/controle')}>
-            <View style={styles.conjunto}>
-              <Entypo name="bar-graph" size={24} color="white" />
-              <Text style={styles.textConjunto}>Controle</Text>
-            </View>
-          </TouchableOpacity >
-
-            <TouchableOpacity 
-              style={styles.conjunto}
-              onPress={() => router.push('/(tabs)')} 
-            >
-              <MaterialCommunityIcons name="logout" size={24} color="white" />
-              <Text style={styles.textConjunto}>Logout</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+       <NavBar buttons={buttons} />
         <View style={styles.textos}>
           <Text style={styles.title}>Sobre nós</Text>
           <View>
@@ -88,40 +67,6 @@ destaqueProduto: {
     height: 150,
     backgroundColor: 'white',
     borderRadius: 16,
-},
-logo : { 
-    width: 50,
-    height: 50,
-    marginLeft: 10,
-},
-NavBar: {
-    backgroundColor: '#2640A8',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    gap: "28%",
-    minHeight: 70,
-},
-icon: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-},
-conjunto: {  
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-},
-conjuntoBtns: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    gap: "5%",
-},
-textConjunto: {
-    color: 'white',
-    fontSize: 18,
 },
 textos: {
     justifyContent: 'center',

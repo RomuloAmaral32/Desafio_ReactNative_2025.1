@@ -4,14 +4,14 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 're
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import NavBar from '../../components/navBar';
+import NavBar from '../../components/NavBar';             //tava (talvez ainda esteja) essa parte com o vermelho de problemas- mas os nomes sao os mesmos, mesmas letras maiusculas e minusculas
 
 export default function PaginaInicial() {
   const navigation = useNavigation(); 
   const buttons = [
     { label: 'Controle', icon: <Entypo name="bar-graph" size={24} color="white" />, onPress: () => router.push('/(tabs)/controle') },
     { label: 'Contato', icon: <MaterialCommunityIcons name="chat-processing" size={24} color="white" />, onPress: () => router.push('/(tabs)/contato') },
-    { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => navigation.goBack() }
+    { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => router.push('/(tabs)') }
   ];
   return (
     <ScrollView style={styles.containerPai}> 

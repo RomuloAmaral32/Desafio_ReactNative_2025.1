@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
   },
   conjuntoBtns: {
     flexDirection: 'row',
-    gap:1000,
+    marginLeft: 80,
     justifyContent: 'space-around',
+    gap:5,
     flex: 1, 
   },
   textConjunto: {
