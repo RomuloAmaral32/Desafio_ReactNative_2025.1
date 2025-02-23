@@ -15,7 +15,7 @@ export default function PaginaInicial() {
   return (
     <ScrollView style={styles.containerPai}> 
     <NavBar buttons={buttons} />
-    <View style={styles.containerPai}>
+    <View>
         <View style={styles.container}>
           <Text style={styles.title}>Produto em destaque</Text>
           <View style={styles.destaqueProduto}>
