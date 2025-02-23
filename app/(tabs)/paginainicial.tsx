@@ -4,41 +4,19 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 're
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import NavBar from '../../components/navBar';
 
 export default function PaginaInicial() {
   const navigation = useNavigation(); 
-
+  const buttons = [
+    { label: 'Controle', icon: <Entypo name="bar-graph" size={24} color="white" />, onPress: () => router.push('/(tabs)/controle') },
+    { label: 'Contato', icon: <MaterialCommunityIcons name="chat-processing" size={24} color="white" />, onPress: () => router.push('/(tabs)/contato') },
+    { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => navigation.goBack() }
+  ];
   return (
     <ScrollView style={styles.containerPai}> 
+    <NavBar buttons={buttons} />
     <View style={styles.containerPai}>
-      <View style={styles.NavBar}>
-        <Image 
-          source={require('../../assets/images/marketplace.png')}
-          style={styles.logo}
-        />
-        <View style={styles.conjuntoBtns}>
-        <TouchableOpacity onPress={() => router.push('/(tabs)/controle')}>
-          <View style={styles.conjunto}>
-            <Entypo name="bar-graph" size={24} color="white" />
-            <Text style={styles.textConjunto}>Controle</Text>
-          </View>
-        </TouchableOpacity >
-          <TouchableOpacity onPress={() => router.push('/(tabs)/contato')}>
-            <View style={styles.conjunto}>
-              <MaterialCommunityIcons name="chat-processing" size={24} color="white" />
-              <Text style={styles.textConjunto}>Contato</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={styles.conjunto}
-            onPress={() => router.push('/(tabs)')} // Navega para a tela de Logout------volta para a tela anterior(o correto seria voltar para a index sem depender de voltar para a tela anterior)
-          >
-            <MaterialCommunityIcons name="logout" size={24} color="white" />
-            <Text style={styles.textConjunto}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
         <View style={styles.container}>
           <Text style={styles.title}>Produto em destaque</Text>
           <View style={styles.destaqueProduto}>
@@ -79,40 +57,6 @@ destaqueProduto: {
     height: 150,
     backgroundColor: 'white',
     borderRadius: 16,
-},
-logo : { 
-    width: 50,
-    height: 50,
-    marginLeft: 10,
-},
-NavBar: {
-    backgroundColor: '#2640A8',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    gap: "20%",
-    minHeight: 70,
-},
-icon: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-},
-conjunto: {  
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-},
-conjuntoBtns: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    gap: "5%",
-},
-textConjunto: {
-    color: 'white',
-    fontSize: 18,
 },
 title: {
     fontSize: 24,
