@@ -3,7 +3,9 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 're
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import NavBar from '../../components/NavBar';             
+import NavBar from '../../components/NavBar';  
+import CardsCarrossel from '@/components/CardCarrossel';  
+import ProdutoDestaque from '@/components/ProdutoDestaque';    
 
 export default function PaginaInicial() {
   const navigation = useNavigation(); 
@@ -18,14 +20,47 @@ export default function PaginaInicial() {
     <View>
         <View style={styles.container}>
           <Text style={styles.title}>Produto em destaque</Text>
-          <View style={styles.destaqueProduto}>
-
+          <View>
+            <ProdutoDestaque
+            imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s"
+            title="Hamburger"
+            price="R$ 29,99"
+            onView={() => console.log('Visualizar')}
+            onEdit={() => console.log('Editar')}
+            onDelete={() => console.log('Excluir')} 
+            />
           </View>
         </View>
         <View style={styles.containerNovos}>
         <Text style={styles.subtitle}>Novos Produtos</Text>
-          <View style={styles.cards}>
-
+          <View style={styles.carrossel}>
+                          <CardsCarrossel
+                          imageUri="https://lojadatenb2c.vtexassets.com/assets/vtex.file-manager-graphql/images/c0170385-30d6-4fed-9deb-4f5d57d9062d___affcfd10d3331c2bcaeb0df63c07b92a.png"
+                          category="Eletrônicos"
+                          title="Notbook"
+                          price="R$ 1999,99"
+                          onView={() => console.log('Visualizar')}
+                          onEdit={() => console.log('Editar')}
+                          onDelete={() => console.log('Excluir')} 
+                          />
+                          <CardsCarrossel
+                          imageUri="https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg"
+                          category="Vestuarios"
+                          title="Calçado"
+                          price="R$ 190,99"
+                          onView={() => console.log('Visualizar')}
+                          onEdit={() => console.log('Editar')}
+                          onDelete={() => console.log('Excluir')} 
+                          />
+                          <CardsCarrossel
+                          imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s"
+                          category="Comida"
+                          title="Hamburger"
+                          price="R$ 29,99"
+                          onView={() => console.log('Visualizar')}
+                          onEdit={() => console.log('Editar')}
+                          onDelete={() => console.log('Excluir')}  
+                          />
           </View>
         </View>
         <View>
@@ -45,16 +80,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#999393',
 },
+carrossel: {
+  flexDirection: 'row',
+  gap:10,
+  marginBottom:20,
+},
 container: {
     marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
-},
-destaqueProduto: {
-    width: "80%",
-    height: 150,
-    backgroundColor: 'white',
-    borderRadius: 16,
 },
 title: {
     fontSize: 24,
@@ -72,16 +106,6 @@ containerNovos: {
     marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
-},
-cards: {
-    width: "30%",
-    height: 180,
-    borderRadius: 16,
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    gap: "5%",
-    marginBottom: 30,
 },
 descricao: {
     fontSize: 18,
