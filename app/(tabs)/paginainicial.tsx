@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView  } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, FlatList   } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -30,7 +30,7 @@ export default function PaginaInicial() {
     },
     {
       imageUri: 'https://t2.tudocdn.net/719058?w=824&h=494',
-      title: 'Smartphone XYZ',
+      title: 'Smartphone ',
       price: 'R$ 1999,99',
       category: 'Eletrônico',
 
@@ -58,7 +58,7 @@ export default function PaginaInicial() {
     },
     {
       imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3EkkbEdF4CsU_9ajQ4LzNYn2TSs1je7JEOA&s',
-      title: 'Casa em condomínio',
+      title: 'Casa de luxo',
       price: 'R$ 259500',
       category: 'Imóveis',
 
@@ -68,41 +68,45 @@ export default function PaginaInicial() {
     <ScrollView style={styles.containerPai}> 
     <NavBar buttons={buttons} />
     <View>
-        <View style={styles.container}>
-          <Text style={styles.title}>Produto em destaque</Text>
-          <View>
-            <ProdutoDestaque
-            imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s"
-            title="Hamburger"
-            price="R$ 29,99"
-            onView={() => console.log('Visualizar')}
-            onEdit={() => console.log('Editar')}
-            onDelete={() => console.log('Excluir')} 
-            />
+          <View style={styles.container}>
+            <Text style={styles.title}>Produto em destaque</Text>
+            <View>
+              <ProdutoDestaque
+              imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s"
+              title="Hamburger"
+              price="R$ 29,99"
+              onView={() => console.log('Visualizar')}
+              onEdit={() => console.log('Editar')}
+              onDelete={() => console.log('Excluir')} 
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.containerNovos}>
-        <Text style={styles.subtitle}>Novos Produtos</Text>
-          <View style={styles.carrossel}>
-                         {products.map((product, index) => (
-                                     <View key={index}>
-                                       <CardsCarrossel
-                                         imageUri={product.imageUri}
-                                         category={product.category}
-                                         title={product.title}
-                                         price={product.price} 
-                                       />
-                                     </View>
-                                   ))}
-          </View>
-        </View>
-        <View>
+          <View style={styles.containerNovos}>
+          <Text style={styles.subtitle}>Novos Produtos</Text>
+          <FlatList style={styles.carrossel}
+            data={products}
+            renderItem={({ item }) => (
+              <View style={styles.carrosselItem}>
+                <CardsCarrossel
+                  imageUri={item.imageUri}
+                  category={item.category}
+                  title={item.title}
+                  price={item.price}
+                />
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+          />
+      </View>
           <Text style={styles.subtitle}>sobre o aplicativo</Text>
         </View>
         <View style={styles.containerdescricao}>
           <Text style={styles.descricao}>O aplicativo tem como objetivo centralizar todas as ofertas de produtos de diversas categorias em um único lugar, criando um ponto de encontro entre vendedores e clientes. Nele, os usuários podem explorar novidades e aproveitar boas ofertas, facilitando o encontro eficiente entre a oferta e a demanda. Dessa forma, o aplicativo proporciona uma experiência prática e otimizada, onde consumidores podem acessar uma ampla variedade de produtos, enquanto os vendedores encontram uma plataforma eficaz para alcançar seu público-alvo.</Text>
         </View>
-    </View>
+  
     </ScrollView>
   );
 } 
@@ -114,9 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#999393',
 },
 carrossel: {
-  flexDirection: 'row',
-  gap:10,
-  marginBottom:20,
+  marginLeft: 7,
 },
 container: {
     marginTop: 30,
@@ -133,6 +135,7 @@ subtitle: {
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
+    marginTop:20,
     marginBottom: 20,
 },
 containerNovos: {
@@ -145,6 +148,9 @@ descricao: {
     textAlign: 'center',
     fontWeight: 'regular',
     marginBottom: 20,
+},
+carrosselItem: {
+  marginRight: 8,
 },
 containerdescricao: {
     marginTop: 5,
