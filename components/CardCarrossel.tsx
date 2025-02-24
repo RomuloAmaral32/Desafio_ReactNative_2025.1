@@ -7,9 +7,6 @@ interface CardsCarrosselProps {
   category: string;
   title: string;
   price: string;
-  onView: () => void;
-  onEdit: () => void;
-  onDelete: () => void;
 }
 
 export default function CardsCarrossel({
@@ -17,9 +14,7 @@ export default function CardsCarrossel({
   category,
   title,
   price,
-  onView,
-  onEdit,
-  onDelete,
+
 }: CardsCarrosselProps) {
   return (
     <View style={styles.cardContainer}>

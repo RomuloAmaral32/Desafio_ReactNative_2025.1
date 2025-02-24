@@ -7,12 +7,62 @@ import NavBar from '../../components/NavBar';
 import CardsCarrossel from '@/components/CardCarrossel';  
 import ProdutoDestaque from '@/components/ProdutoDestaque';    
 
+interface Product {
+  imageUri: string;
+  title: string;
+  price: string;
+  category: string;
+}
+
 export default function PaginaInicial() {
   const navigation = useNavigation(); 
   const buttons = [
     { label: 'Controle', icon: <Entypo name="bar-graph" size={24} color="white" />, onPress: () => router.push('/(tabs)/controle') },
     { label: 'Contato', icon: <MaterialCommunityIcons name="chat-processing" size={24} color="white" />, onPress: () => router.push('/(tabs)/contato') },
     { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => router.push('/(tabs)') }
+  ];
+  const products: Product[] = [
+    {
+      imageUri: 'https://lojadatenb2c.vtexassets.com/assets/vtex.file-manager-graphql/images/c0170385-30d6-4fed-9deb-4f5d57d9062d___affcfd10d3331c2bcaeb0df63c07b92a.png',
+      title: 'Notebook',
+      price: 'R$ 1999,99',
+      category: 'Eletrônico',
+    },
+    {
+      imageUri: 'https://t2.tudocdn.net/719058?w=824&h=494',
+      title: 'Smartphone XYZ',
+      price: 'R$ 1999,99',
+      category: 'Eletrônico',
+
+    },
+    {
+      imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s',
+      title: 'Hamburger',
+      price: 'R$ 29,99',
+      category: 'Alimento',
+
+    },
+    {
+      imageUri: 'https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg',
+      title: 'Calçado',
+      price: 'R$ 190,99',
+      category: 'Vestuários',
+
+    },
+    {
+      imageUri: 'https://www.webmotors.com.br/wp-content/uploads/2022/01/04173246/1.-Honda-CG-160.jpg',
+      title: 'Moto',
+      price: 'R$ 19990,99',
+      category: 'Automóveis',
+
+    },
+    {
+      imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3EkkbEdF4CsU_9ajQ4LzNYn2TSs1je7JEOA&s',
+      title: 'Casa em condomínio',
+      price: 'R$ 259500',
+      category: 'Imóveis',
+
+    },
   ];
   return (
     <ScrollView style={styles.containerPai}> 
@@ -34,33 +84,16 @@ export default function PaginaInicial() {
         <View style={styles.containerNovos}>
         <Text style={styles.subtitle}>Novos Produtos</Text>
           <View style={styles.carrossel}>
-                          <CardsCarrossel
-                          imageUri="https://lojadatenb2c.vtexassets.com/assets/vtex.file-manager-graphql/images/c0170385-30d6-4fed-9deb-4f5d57d9062d___affcfd10d3331c2bcaeb0df63c07b92a.png"
-                          category="Eletrônicos"
-                          title="Notbook"
-                          price="R$ 1999,99"
-                          onView={() => console.log('Visualizar')}
-                          onEdit={() => console.log('Editar')}
-                          onDelete={() => console.log('Excluir')} 
-                          />
-                          <CardsCarrossel
-                          imageUri="https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg"
-                          category="Vestuarios"
-                          title="Calçado"
-                          price="R$ 190,99"
-                          onView={() => console.log('Visualizar')}
-                          onEdit={() => console.log('Editar')}
-                          onDelete={() => console.log('Excluir')} 
-                          />
-                          <CardsCarrossel
-                          imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s"
-                          category="Comida"
-                          title="Hamburger"
-                          price="R$ 29,99"
-                          onView={() => console.log('Visualizar')}
-                          onEdit={() => console.log('Editar')}
-                          onDelete={() => console.log('Excluir')}  
-                          />
+                         {products.map((product, index) => (
+                                     <View key={index}>
+                                       <CardsCarrossel
+                                         imageUri={product.imageUri}
+                                         category={product.category}
+                                         title={product.title}
+                                         price={product.price} 
+                                       />
+                                     </View>
+                                   ))}
           </View>
         </View>
         <View>
