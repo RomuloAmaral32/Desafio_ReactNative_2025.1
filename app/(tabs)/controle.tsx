@@ -6,6 +6,8 @@ import { router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import NavBar from '../../components/NavBar';
 import CardsControle from '../../components/CardsControle';
+import ModalVisualizarProduto from '@/components/ModalVisualizar';
+import ModalEditarProduto from '@/components/ModalEditar';
 
 interface Product {
   imageUri: string;
@@ -15,24 +17,7 @@ interface Product {
 }
 
 export default function Controle() {
-  
-  const navigation = useNavigation(); 
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-
-  const AbreModalProduto = (product: Product) => {
-    setSelectedProduct(product);
-    setModalVisible(true);
-  };
-  
-  const buttons = [
-    { label: 'Home', icon: <FontAwesome name="home" size={24} color="white" />, onPress: () => router.push('/(tabs)/paginainicial') },
-    { label: 'Contato', icon: <MaterialCommunityIcons name="chat-processing" size={24} color="white" />, onPress: () => router.push('/(tabs)/contato') },
-    { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => router.push('/(tabs)') }
-  ];
-
-  const products: Product[] = [
+  const [products, setProducts] = useState<Product[]>([
     {
       imageUri: 'https://lojadatenb2c.vtexassets.com/assets/vtex.file-manager-graphql/images/c0170385-30d6-4fed-9deb-4f5d57d9062d___affcfd10d3331c2bcaeb0df63c07b92a.png',
       title: 'Notebook',
@@ -44,37 +29,74 @@ export default function Controle() {
       title: 'Smartphone XYZ',
       price: 'R$ 1999,99',
       category: 'Eletrônico',
-
     },
     {
       imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s',
       title: 'Hamburger',
       price: 'R$ 29,99',
       category: 'Alimento',
-
     },
     {
       imageUri: 'https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg',
       title: 'Calçado',
       price: 'R$ 190,99',
       category: 'Vestuários',
-
     },
     {
       imageUri: 'https://www.webmotors.com.br/wp-content/uploads/2022/01/04173246/1.-Honda-CG-160.jpg',
       title: 'Moto',
       price: 'R$ 19990,99',
       category: 'Automóveis',
-
     },
     {
       imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3EkkbEdF4CsU_9ajQ4LzNYn2TSs1je7JEOA&s',
       title: 'Casa em condomínio',
       price: 'R$ 259500',
       category: 'Imóveis',
-
     },
+  ]);
+  
+  
+  const navigation = useNavigation(); 
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalEditVisible, setModalEditVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const AbreModalProduto = (product: Product) => {
+    setSelectedProduct(product);
+    setModalVisible(true);
+  };
+  
+  const AbreModalEditar = (product: Product) => {
+    setSelectedProduct(product);
+    setModalEditVisible(true);
+  };
+  
+  const updateProductInList = (updatedProduct: Product) => {
+    setProducts((prevProducts: Product[]) =>
+      prevProducts.map((product: Product) =>
+        product.title === updatedProduct.title ? updatedProduct : product
+      )
+    );
+  };
+  
+
+  // Função para salvar as alterações do produto
+  const handleSaveProduct = (updatedProduct: Product) => {
+    console.log('Produto atualizado:', updatedProduct);
+    setModalEditVisible(false); 
+    updateProductInList(updatedProduct);
+    setModalEditVisible(false); 
+  };
+ 
+  
+  const buttons = [
+    { label: 'Home', icon: <FontAwesome name="home" size={24} color="white" />, onPress: () => router.push('/(tabs)/paginainicial') },
+    { label: 'Contato', icon: <MaterialCommunityIcons name="chat-processing" size={24} color="white" />, onPress: () => router.push('/(tabs)/contato') },
+    { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => router.push('/(tabs)') }
   ];
+
 
   return(
     <ScrollView style={styles.containerPai}>
@@ -106,39 +128,24 @@ export default function Controle() {
                 title={product.title}
                 price={product.price}
                 onView={() => AbreModalProduto(product)}  
-                onEdit={() => console.log('Editar')}
+                onEdit={() => AbreModalEditar(product)}
                 onDelete={() => console.log('Excluir')} 
               />
             </View>
           ))}
         </View>
       </View>
-
-      <Modal
-        animationType='slide'
-        transparent={true}
+      <ModalVisualizarProduto
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            {selectedProduct && (
-              <>
-                <Image source={{ uri: selectedProduct.imageUri }} style={styles.modalImage} />
-                <Text style={styles.modalcategory}>{selectedProduct.category}</Text>
-                <Text style={styles.modalTitle}>{selectedProduct.title}</Text>
-                <Text style={styles.modalPrice}>{selectedProduct.price}</Text>
-                <TouchableOpacity
-                  style={styles.ButtonFechar}
-                  onPress={() => setModalVisible(false)}
-                >
-                  <Text style={styles.ButtonFecharTxt}>Fechar</Text>
-                </TouchableOpacity>
-              </>
-            )}
-          </View>
-        </View>
-      </Modal>
+        onClose={() => setModalVisible(false)}
+        product={selectedProduct}
+      />
+      <ModalEditarProduto
+        visible={modalEditVisible}
+        onClose={() => setModalEditVisible(false)}
+        product={selectedProduct}
+        onSave={handleSaveProduct}
+      />
     </ScrollView> 
   );
 }
@@ -202,52 +209,5 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     gap: 15,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-  },
-  modalView: {
-    width: '80%',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
-    alignItems: 'center',
-    elevation: 5,
-  },
-  modalImage: {
-    width: '100%',
-    height: 200,
-    marginBottom: 20,
-    borderRadius: 10,
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  modalPrice: {
-    fontSize: 20,
-    color: '#1C17BD',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  modalcategory:{
-    fontSize:16,
-    marginBottom:10,
-  },
-  ButtonFechar: {
-    backgroundColor: '#2028BF',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-  },
-  ButtonFecharTxt: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });
