@@ -61,15 +61,17 @@ const ModalEditarProduto: React.FC<ModalEditarProdutoProps> = ({ visible, onClos
                 onChangeText={(text) => setEditedProduct({ ...editedProduct, category: text })}
               />
               
-              <TouchableOpacity style={styles.button} onPress={handleSave}>
-                <Text style={styles.buttonText}>Salvar</Text>
-              </TouchableOpacity>
             </>
           )}
-
+          <View style={styles.buttonContainer}>
           <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={onClose}>
             <Text style={styles.buttonText}>Cancelar</Text>
           </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={handleSave}>
+                <Text style={styles.buttonText}>Salvar</Text>
+              </TouchableOpacity>
+
+          </View>
         </View>
       </View>
     </Modal>
@@ -116,6 +118,11 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     backgroundColor: '#FF0000',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
   },
 });
 
