@@ -23,11 +23,11 @@ const ModalDeletar: React.FC<ModalDeletarProps> = ({ visible, onClose, onDelete,
           <Text style={styles.modalContent}>Tem certeza de que deseja excluir este item?</Text>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
-              <Text style={styles.buttonText}>Deletar</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
               <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
+              <Text style={styles.buttonText}>Deletar</Text>
             </TouchableOpacity>
           </View>
         </View>

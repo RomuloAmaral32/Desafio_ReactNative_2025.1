@@ -9,6 +9,7 @@ import CardsControle from '../../components/CardsControle';
 import ModalVisualizarProduto from '@/components/ModalVisualizar';
 import ModalEditarProduto from '@/components/ModalEditar';
 import ModalDeletar from '@/components/ModalDeletar';
+import ModalCriarProduto from '@/components/ModalCriar';
 
 interface Product {
   imageUri: string;
@@ -63,6 +64,12 @@ export default function Controle() {
   const [modalEditVisible, setModalEditVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [modalDeleteVisible, setModalDeleteVisible] = useState<Product | null>(null);
+  const [modalCreateVisible, setModalCreateVisible] = useState(false);
+
+  const handleCreateProduct = (newProduct: Product) => {
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
+  };
+
 
   const AbreModalProduto = (product: Product) => {
     setSelectedProduct(product);
@@ -123,7 +130,7 @@ export default function Controle() {
           <Text style={styles.nome}>Rômulo</Text>
         </View>
         <View style={styles.btnCriar}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => setModalCreateVisible(true)}>
             <View style={styles.txtBotao}>
               <Text style={styles.buttonText}>Criar</Text>
               <FontAwesome name="plus" size={18} color="white" />
@@ -166,6 +173,11 @@ export default function Controle() {
         onClose={() => setModalDeleteVisible(null)}
         onDelete={handleDeleteProduct}
         title="Excluir Produto"
+      />
+       <ModalCriarProduto
+        visible={modalCreateVisible}
+        onClose={() => setModalCreateVisible(false)}
+        onCreate={handleCreateProduct}
       />
     </ScrollView> 
   );
