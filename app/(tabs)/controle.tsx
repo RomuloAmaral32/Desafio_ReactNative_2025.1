@@ -8,6 +8,7 @@ import NavBar from '../../components/NavBar';
 import CardsControle from '../../components/CardsControle';
 import ModalVisualizarProduto from '@/components/ModalVisualizar';
 import ModalEditarProduto from '@/components/ModalEditar';
+import ModalDeletar from '@/components/ModalDeletar';
 
 interface Product {
   imageUri: string;
@@ -56,23 +57,23 @@ export default function Controle() {
     },
   ]);
   
-  
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalEditVisible, setModalEditVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [modalDeleteVisible, setModalDeleteVisible] = useState<Product | null>(null);
 
   const AbreModalProduto = (product: Product) => {
     setSelectedProduct(product);
     setModalVisible(true);
   };
-  
+
   const AbreModalEditar = (product: Product) => {
     setSelectedProduct(product);
     setModalEditVisible(true);
   };
-  
+
   const updateProductInList = (updatedProduct: Product) => {
     setProducts((prevProducts: Product[]) =>
       prevProducts.map((product: Product) =>
@@ -80,27 +81,41 @@ export default function Controle() {
       )
     );
   };
-  
 
-  // Função para salvar as alterações do produto
   const handleSaveProduct = (updatedProduct: Product) => {
     console.log('Produto atualizado:', updatedProduct);
-    setModalEditVisible(false); 
-    updateProductInList(updatedProduct);
-    setModalEditVisible(false); 
+
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.title === updatedProduct.title ? updatedProduct : product
+      )
+    );
+    
+    setModalEditVisible(false);
   };
- 
-  
+
+  // Função para abrir o modal de exclusão
+  const openDeleteModal = (product: Product) => {
+    setModalDeleteVisible(product);
+  };
+
+  // Função para excluir o produto
+  const handleDeleteProduct = () => {
+    if (modalDeleteVisible) {
+      setProducts(products.filter((product) => product.title !== modalDeleteVisible.title));
+      setModalDeleteVisible(null);
+    }
+  };
+
   const buttons = [
     { label: 'Home', icon: <FontAwesome name="home" size={24} color="white" />, onPress: () => router.push('/(tabs)/paginainicial') },
     { label: 'Contato', icon: <MaterialCommunityIcons name="chat-processing" size={24} color="white" />, onPress: () => router.push('/(tabs)/contato') },
     { label: 'Logout', icon: <MaterialCommunityIcons name="logout" size={24} color="white" />, onPress: () => router.push('/(tabs)') }
   ];
 
-
-  return(
+  return (
     <ScrollView style={styles.containerPai}>
-      <NavBar buttons={buttons}/>
+      <NavBar buttons={buttons} />
       <View style={styles.boasVindas}>
         <FontAwesome name="user-circle-o" size={40} color="black" />
         <View style={styles.txtBoas}>
@@ -129,7 +144,7 @@ export default function Controle() {
                 price={product.price}
                 onView={() => AbreModalProduto(product)}  
                 onEdit={() => AbreModalEditar(product)}
-                onDelete={() => console.log('Excluir')} 
+                onDelete={() => openDeleteModal(product)} 
               />
             </View>
           ))}
@@ -145,6 +160,12 @@ export default function Controle() {
         onClose={() => setModalEditVisible(false)}
         product={selectedProduct}
         onSave={handleSaveProduct}
+      />
+      <ModalDeletar
+        visible={modalDeleteVisible !== null}
+        onClose={() => setModalDeleteVisible(null)}
+        onDelete={handleDeleteProduct}
+        title="Excluir Produto"
       />
     </ScrollView> 
   );

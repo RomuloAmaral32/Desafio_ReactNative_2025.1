@@ -41,6 +41,7 @@ const ModalEditarProduto: React.FC<ModalEditarProdutoProps> = ({ visible, onClos
 
           {editedProduct && (
             <>
+
               <TextInput
                 style={styles.input}
                 placeholder="Título"
