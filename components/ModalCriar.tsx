@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 interface Product {
   id: string; 
@@ -24,6 +26,25 @@ const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose
     category: '',
   });
 
+  // Função para abrir a galeria e escolher uma imagem
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted) {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.canceled) {
+        setNewProduct((prev) => ({ ...prev, imageUri: result.assets[0].uri }));
+      }
+    } else {
+      alert('Permissão para acessar a galeria foi negada');
+    }
+  };
+
   const handleChange = (field: keyof Product, value: string) => {
     setNewProduct((prev) => ({ ...prev, [field]: value }));
   };
@@ -31,7 +52,7 @@ const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose
   const handleCreate = () => {
     onCreate(newProduct); // Envia o novo produto para a função onCreate
     onClose(); // Fecha o modal
-    setNewProduct({id: '', imageUri: '', title: '', price: '', category: '' }); // Limpa os campos após criar
+    setNewProduct({ id: '', imageUri: '', title: '', price: '', category: '' }); // Limpa os campos após criar
   };
 
   return (
@@ -39,6 +60,14 @@ const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose
       <View style={styles.modalBackground}>
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>Criar Produto</Text>
+          <TouchableOpacity onPress={pickImage} style={styles.imageContainer}>
+            {newProduct.imageUri ? (
+              <Image source={{ uri: newProduct.imageUri }} style={styles.image} />
+            ) : (
+              <MaterialCommunityIcons name="image-plus" size={48} color="black" />
+            )}
+          </TouchableOpacity>
+
           <TextInput
             style={styles.input}
             placeholder="Título"
@@ -58,21 +87,15 @@ const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose
             value={newProduct.price}
             onChangeText={(text) => handleChange('price', text)}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Imagem (URL)"
-            value={newProduct.imageUri}
-            onChangeText={(text) => handleChange('imageUri', text)}
-          />
 
-                <View style={styles.buttons}>
-                    <TouchableOpacity onPress={onClose} style={styles.button}>
-                    <Text style={styles.buttonText}>Cancelar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleCreate} style={styles.button}>
-                    <Text style={styles.buttonText}>Criar</Text>
-                    </TouchableOpacity>
-                </View>
+          <View style={styles.buttons}>
+            <TouchableOpacity onPress={onClose} style={styles.button}>
+              <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleCreate} style={styles.button}>
+              <Text style={styles.buttonText}>Criar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -106,10 +129,27 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 5,
   },
+  imageContainer: {
+    width: 200,
+    height: 200,
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius: 8,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  imageText: {
+    color: '#888',
+  },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+   gap: 40,
   },
   button: {
     backgroundColor: '#2028BF',
