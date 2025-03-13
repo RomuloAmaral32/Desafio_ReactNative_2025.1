@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 interface Product {
+  id: string; 
   imageUri: string;
   title: string;
   price: string;
@@ -16,6 +17,7 @@ interface ModalCreateProductProps {
 
 const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose, onCreate }) => {
   const [newProduct, setNewProduct] = useState<Product>({
+    id: '',
     imageUri: '',
     title: '',
     price: '',
@@ -29,7 +31,7 @@ const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose
   const handleCreate = () => {
     onCreate(newProduct); // Envia o novo produto para a função onCreate
     onClose(); // Fecha o modal
-    setNewProduct({ imageUri: '', title: '', price: '', category: '' }); // Limpa os campos após criar
+    setNewProduct({id: '', imageUri: '', title: '', price: '', category: '' }); // Limpa os campos após criar
   };
 
   return (

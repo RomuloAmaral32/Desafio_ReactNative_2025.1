@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import { Product } from '../components/ModalGenerico';
+//import { Product } from '../components/ModalGenerico';
 
+
+import { Product } from '../app/(tabs)/controle';
 
 interface ModalEditarProdutoProps {
   visible: boolean;

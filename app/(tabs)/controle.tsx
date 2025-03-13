@@ -11,46 +11,54 @@ import ModalEditarProduto from '@/components/ModalEditar';
 import ModalDeletar from '@/components/ModalDeletar';
 import ModalCriarProduto from '@/components/ModalCriar';
 
-interface Product {
+export interface Product {
+  id: string; // Adicionando o id
   imageUri: string;
   title: string;
   price: string;
   category: string;
 }
 
+
 export default function Controle() {
   const [products, setProducts] = useState<Product[]>([
     {
+      id: '1',
       imageUri: 'https://lojadatenb2c.vtexassets.com/assets/vtex.file-manager-graphql/images/c0170385-30d6-4fed-9deb-4f5d57d9062d___affcfd10d3331c2bcaeb0df63c07b92a.png',
       title: 'Notebook',
       price: 'R$ 1999,99',
       category: 'Eletrônico',
     },
     {
+      id: '2',
       imageUri: 'https://t2.tudocdn.net/719058?w=824&h=494',
       title: 'Smartphone XYZ',
       price: 'R$ 1999,99',
       category: 'Eletrônico',
     },
     {
+      id: '3',
       imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9A5I3P4rt1kftXxVds7cQWs306znK9nrmdA&s',
       title: 'Hamburger',
       price: 'R$ 29,99',
       category: 'Alimento',
     },
     {
+      id: '4',
       imageUri: 'https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg',
-      title: 'Calçado',
+      title: 'Moto',
       price: 'R$ 190,99',
       category: 'Vestuários',
     },
     {
+      id: '5',
       imageUri: 'https://www.webmotors.com.br/wp-content/uploads/2022/01/04173246/1.-Honda-CG-160.jpg',
       title: 'Moto',
       price: 'R$ 19990,99',
       category: 'Automóveis',
     },
     {
+      id: '6',
       imageUri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3EkkbEdF4CsU_9ajQ4LzNYn2TSs1je7JEOA&s',
       title: 'Casa em condomínio',
       price: 'R$ 259500',
@@ -84,7 +92,7 @@ export default function Controle() {
   const updateProductInList = (updatedProduct: Product) => {
     setProducts((prevProducts: Product[]) =>
       prevProducts.map((product: Product) =>
-        product.title === updatedProduct.title ? updatedProduct : product
+        product.id === updatedProduct.id ? updatedProduct : product
       )
     );
   };
@@ -94,7 +102,7 @@ export default function Controle() {
 
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.title === updatedProduct.title ? updatedProduct : product
+        product.id === updatedProduct.id ? updatedProduct : product
       )
     );
     
@@ -107,12 +115,14 @@ export default function Controle() {
   };
 
   // Função para excluir o produto
-  const handleDeleteProduct = () => {
-    if (modalDeleteVisible) {
-      setProducts(products.filter((product) => product.title !== modalDeleteVisible.title));
-      setModalDeleteVisible(null);
-    }
-  };
+ // Função para excluir o produto usando o id
+const handleDeleteProduct = () => {
+  if (modalDeleteVisible) {
+    setProducts(products.filter((product) => product.id !== modalDeleteVisible.id));
+    setModalDeleteVisible(null);
+  }
+};
+
 
   const buttons = [
     { label: 'Home', icon: <FontAwesome name="home" size={24} color="white" />, onPress: () => router.push('/(tabs)/paginainicial') },
@@ -142,19 +152,19 @@ export default function Controle() {
       <View style={styles.produtos}>
         <Text style={styles.title}>Seus produtos:</Text>
         <View style={styles.todoscards}>
-          {products.map((product, index) => (
-            <View key={index}>
-              <CardsControle
-                imageUri={product.imageUri}
-                category={product.category}
-                title={product.title}
-                price={product.price}
-                onView={() => AbreModalProduto(product)}  
-                onEdit={() => AbreModalEditar(product)}
-                onDelete={() => openDeleteModal(product)} 
-              />
-            </View>
-          ))}
+        {products.map((product) => (
+        <View key={product.id}>
+          <CardsControle
+            imageUri={product.imageUri}
+            category={product.category}
+            title={product.title}
+            price={product.price}
+            onView={() => AbreModalProduto(product)}  
+            onEdit={() => AbreModalEditar(product)}
+            onDelete={() => openDeleteModal(product)} 
+          />
+        </View>
+      ))}
         </View>
       </View>
       <ModalVisualizarProduto
