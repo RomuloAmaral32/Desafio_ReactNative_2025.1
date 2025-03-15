@@ -4,14 +4,14 @@ import type { ProdutosState } from '../api/produtos';
 // API de produtos
 const produtosApi = createApi({
   reducerPath: 'produtosApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://treinamentoapi.codejr.com.br/api/v1' }), // Endpoint correto da API
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://treinamentoapi.codejr.com.br/api/documentation#/' }),
   tagTypes: ['Produtos'],
   endpoints: (builder) => ({
     getProdutos: builder.query<ProdutosState[], void>({
-      query: () => '/products', // Ajuste a rota correta da API
+      query: () => '/products', 
       providesTags: ['Produtos'],
       transformResponse: (response: ProdutosState[]) => {
-        return response.reverse(); // Apenas um exemplo de transformação
+        return response.reverse(); 
       },
     }),
     getProdutosById: builder.query<ProdutosState, number>({
