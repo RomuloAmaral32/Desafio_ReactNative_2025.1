@@ -46,7 +46,7 @@ export default function Controle() {
     {
       id: '4',
       imageUri: 'https://cdn.awsli.com.br/600x700/1116/1116092/produto/224078346/facetune_12-08-2024-17-30-19-n2iocensqw.jpg',
-      title: 'Moto',
+      title: 'Calçado',
       price: 'R$ 190,99',
       category: 'Vestuários',
     },
