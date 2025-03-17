@@ -50,7 +50,7 @@ const ModalCriarProduto: React.FC<ModalCreateProductProps> = ({ visible, onClose
   };
 
   const handleCreate = () => {
-    onCreate(newProduct); // Envia o novo produto para a função onCreate
+    onCreate(newProduct); /* nessa parte deveria criar um produto pelo id usando a API pelo método POST, porem nao consegui integrar */
     onClose(); // Fecha o modal
     setNewProduct({ id: '', imageUri: '', title: '', price: '', category: '' }); // Limpa os campos após criar
   };

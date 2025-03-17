@@ -18,7 +18,7 @@ interface ModalVisualizarProdutoProps {
 const ModalVisualizarProduto: React.FC<ModalVisualizarProdutoProps> = ({ visible, onClose, product }) => {
   return (
     <ModalGenerico visible={visible} onClose={onClose} title="Detalhes do Produto">
-      {product && (
+      {product && (                                         /* nessa parte deveria puxar os dado do produto pelo id usando a API pelo método GET, porem nao consegui integrar */
         <View style={styles.content}>
           <Image source={{ uri: product.imageUri }} style={styles.modalImage} />
           <Text style={styles.modalCategory}>{product.category}</Text>

@@ -152,7 +152,7 @@ const handleDeleteProduct = () => {
       <View style={styles.produtos}>
         <Text style={styles.title}>Seus produtos:</Text>
         <View style={styles.todoscards}>
-        {products.map((product) => (
+        {products.map((product) => (                                  //nessa parte deveria pegar os dados da API pelo método GET, porem nao consegui integrar
         <View key={product.id}>
           <CardsControle
             imageUri={product.imageUri}

@@ -26,6 +26,7 @@ const ModalDeletar: React.FC<ModalDeletarProps> = ({ visible, onClose, onDelete,
             <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
               <Text style={styles.buttonText}>Cancelar</Text>
             </TouchableOpacity>
+            {/* nessa parte deveria deletar o produto pelo id usando a API pelo método DELETE, porem nao consegui integrar */}
             <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
               <Text style={styles.buttonText}>Deletar</Text>
             </TouchableOpacity>

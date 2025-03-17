@@ -85,7 +85,7 @@ export default function PaginaInicial() {
           <Text style={styles.subtitle}>Novos Produtos</Text>
           <FlatList style={styles.carrossel}
             data={products}
-            renderItem={({ item }) => (
+            renderItem={({ item }) => (                     //nessa parte deveria pegar os dados da API pelo método GET, porem nao consegui integrar 
               <View style={styles.carrosselItem}>
                 <CardsCarrossel
                   imageUri={item.imageUri}

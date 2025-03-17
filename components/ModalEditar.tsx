@@ -39,7 +39,7 @@ const ModalEditarProduto: React.FC<ModalEditarProdutoProps> = ({ visible, onClos
     }
   };
 
-  // Função para salvar as alterações
+  /* nessa parte deveria editar o produto pelo id usando a API pelo método PUT, porem nao consegui integrar */
   const handleSave = () => {
     if (editedProduct) {
       onSave(editedProduct); // Chama a função de salvar com o produto editado
